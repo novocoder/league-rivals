@@ -48,10 +48,16 @@ angular.module('app',['ngRoute']).
                     '<div class="container">' +
                       'Enter Summoner Name ' +
                       '<br />' +
+                      '<form>' +
                       '<input id="userName" />' +
                       '<input type="submit" onclick="summonerLookUp();" />' +
+                      '</form>' +
                       '<br />Summoner Level: <span id="sLevel"></span>' +
                       '<br />Summoner ID: <span id="sID"></span>' +
+                      // '<br />Wins: <span id="sWins"></span>' +
+                      '<br />Win: <span id="sGame"></span>' +
+                      '<br />Items: <span id="sitem2"></span>' +
+                      '<br /><div class id="sIcon"></div>' +
                         '<ul class="nav navbar-nav navbar-right">' +
                         '<li ng-repeat="v in views" ng-bind="v.name" ng-class="v.icon" ng-click="switchView(v)"></li>' +
                       '</ul>' +
@@ -61,11 +67,11 @@ angular.module('app',['ngRoute']).
         scope.views = [{
           name: 'List',
           template: 'list.html',
-          icon: 'btn btn-default navbar-btn glyphicon glyphicon-th-list'
+          icon: 'btn btn-default navbar-btn glyphicon glyphicon-th'
         }, {
           name: 'Grid',
           template: 'grid.html',
-          icon: 'btn btn-default navbar-btn glyphicon glyphicon-th'
+          icon: 'btn btn-default navbar-btn glyphicon glyphicon-th-list'
         }];
       },
       controller: ['$scope', function($scope){
