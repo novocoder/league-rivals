@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> 
-<html ng-app="app"> <!--<![endif]-->
+<html> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +18,6 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="script.js"></script>
-  <script type="text/javascript" src="gamedata.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
@@ -26,20 +25,21 @@
 </head>
 <body>
  
-<!--<form>-->
+  <div class="mainContainer" ng-app="LeagueApp">
+    <h1>Summoner Search!</h1>
+    
+    <form ng-submit= ng-controller="gameCtrl">
+            <p> {{summoner.name}} </p>  
+            <p>Summoner ID: {{summoner.id}} </p>
+            <p>Summoner Level: {{summoner.summonerLevel}} </p>
+            <p>Icon: {{summoner.profileIconId}} </p>
+    </div>
+    
+  </div>
+
  
-<!--  <br>-->
-<!--		<input class="search1" type="text" name="name" placeholder="Search Recent Games of Summoner">-->
-<!--	<br>-->
-<!--		<input class="submit" type="submit" value="submit">-->
-		
-
-
-<!--</form>-->
 
  
-
-   <body ng-view=""></body>
 
   
 

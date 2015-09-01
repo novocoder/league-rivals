@@ -1,83 +1,34 @@
-angular.module('app',['ngRoute']).
-  config(['$routeProvider', function($routeProvider){
-    $routeProvider.
-      when('/main', {
-        controller: 'appController',
-        templateUrl: 'main.html'
-      }).
-      otherwise({
-        redirectTo: '/main'
-      });
-  }]).
-  controller('appController', ['$scope', function($scope){
-    $scope.view = 'list.html';
-    $scope.data = [{
-      leagueGame: '1. Champion: Fiora. Killed fitty men'
-    }, {
-      leagueGame: '2. Champion: Chogath. Killed fitty men'  
-    }, {
-      leagueGame: '3. Champion: Ahri. Killed fitty men' 
-    }, {
-      leagueGame: '4. Champion: Fiora. Killed fitty men' 
-    }, {  
-      leagueGame: '5. Champion: Fiora. Killed fitty men' 
-    }, {  
-      leagueGame: '6. Champion: Vlad. Killed fitty men' 
-    }, {  
-      leagueGame: '7. Champion: Fiora. Killed fitty men' 
-    }, {  
-      leagueGame: '8. Champion: Teemo. Killed fitty men' 
-    }, {
-      leagueGame: '9. Champion: Fiora. Killed fitty men' 
-    }, {
-      leagueGame: '10. Champion: Mario. Killed fitty men'      
-    }, {
-      leagueGame: '11. Champion: Fiora. Killed fitty men'      
-    }, {
-      leagueGame: '12. Champion: Zombie. Killed fitty men' 
-    }];
-  }]).
-  
-  directive('appView', function() {
-    return {
-      scope: {
-        view: '=appView'
-      },
-      replace: true,
-      template: '<nav class="navbar navbar-default">' +
-                    '<div class="container">' +
-                      'Enter Summoner Name ' +
-                      '<br />' +
-                      '<form>' +
-                      '<input id="userName" />' +
-                      '<input type="submit" onclick="summonerLookUp();" />' +
-                      '</form>' +
-                      '<br />Summoner Level: <span id="sLevel"></span>' +
-                      '<br />Summoner ID: <span id="sID"></span>' +
-                      // '<br />Wins: <span id="sWins"></span>' +
-                      '<br />Win: <span id="sGame"></span>' +
-                      '<br />Items: <span id="sitem2"></span>' +
-                      '<br /><div class id="sIcon"></div>' +
-                        '<ul class="nav navbar-nav navbar-right">' +
-                        '<li ng-repeat="v in views" ng-bind="v.name" ng-class="v.icon" ng-click="switchView(v)"></li>' +
-                      '</ul>' +
-                    '</div>' +
-                '</nav>',
-      link: function(scope, el, attr) {
-        scope.views = [{
-          name: 'List',
-          template: 'list.html',
-          icon: 'btn btn-default navbar-btn glyphicon glyphicon-th'
-        }, {
-          name: 'Grid',
-          template: 'grid.html',
-          icon: 'btn btn-default navbar-btn glyphicon glyphicon-th-list'
-        }];
-      },
-      controller: ['$scope', function($scope){
-        $scope.switchView = function(view) {
-          $scope.view = view.template;
-        }
-      }]
+/* use strict */
+
+var app = angular.module("LeagueApp", []);
+
+app.service("gameLookup", function ($http, $q)
+{
+    // var SUMMONER_NAME = "";
+    // SUMMONER_NAME = $("#userName").val();
+ 
+    var deferred = $q.defer();
+    $http.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/Reptuar?api_key=c17a43ab-a7a2-40b9-8dbd-be3f67d189e1').then(function (data)
+    {
+        deferred.resolve(data);
+    });
+    
+    this.getSummonerid = function ()
+    {
+        return deferred.promise;
     }
-  });
+})
+
+
+.controller("gameCtrl", function ($scope, gameLookup)
+{
+    var promise = gameLookup.getSummonerid();
+    promise.then(function (data)
+    {
+        $scope.summoner = data.data.reptuar;
+        console.log($scope.summoner);
+        
+    });
+    
+})    
+  
