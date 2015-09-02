@@ -8,7 +8,7 @@ app.service("gameLookup", function ($http, $q)
     // SUMMONER_NAME = $("#userName").val();
  
     var deferred = $q.defer();
-    $http.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/Reptuar?api_key=c17a43ab-a7a2-40b9-8dbd-be3f67d189e1').then(function (data)
+    $http.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + {{formData}} + '?api_key=c17a43ab-a7a2-40b9-8dbd-be3f67d189e1').then(function (data)
     {
         deferred.resolve(data);
     });
@@ -27,8 +27,8 @@ app.service("gameLookup", function ($http, $q)
     {
         $scope.summoner = data.data.reptuar;
         console.log($scope.summoner);
-        
+
     });
-    
-})    
-  
+
+})
+

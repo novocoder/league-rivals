@@ -28,7 +28,23 @@
   <div class="mainContainer" ng-app="LeagueApp">
     <h1>Summoner Search!</h1>
     
-    <form ng-submit= ng-controller="gameCtrl">
+    <div ng-controller="gameCtrl">
+      
+       <form>
+        
+        <div id="summoner-group" class="form-group">
+          <label>Summoner Name</label>
+          <input type="text" name="summonerName" class="form-control" ng-model="formData.summonerName">
+          <span class="help-block"></span>
+        
+        </div>
+        
+        <button type="submit" class="btn btn-success btn-lg btn-block">
+          <span class="glyphicon glyphicon-flash"></span> Submit!
+        </button>
+        
+      </form>
+      <form ng-submit="gameLookup()"></form>
             <p> {{summoner.name}} </p>  
             <p>Summoner ID: {{summoner.id}} </p>
             <p>Summoner Level: {{summoner.summonerLevel}} </p>
